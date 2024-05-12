@@ -12,7 +12,13 @@ const Map = () => {
 
   return (
     <div className="h-full w-full relative">
-      <MapContainer center={[51.505, -0.09]} zoom={17} className="h-full w-full !bg-background" zoomControl={false}>
+      <MapContainer
+        center={[51.505, -0.09]}
+        zoom={17}
+        className="h-full w-full !bg-background"
+        zoomControl={false}
+        style={{ zIndex: 40 }}
+      >
         <TileLayer
           attribution='© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a></strong>'
           url={`/api/map/{z}/{x}/{y}?theme=${theme}`}
