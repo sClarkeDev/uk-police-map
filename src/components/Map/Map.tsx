@@ -6,6 +6,7 @@ import { MapContainer, TileLayer } from 'react-leaflet';
 import 'leaflet-defaulticon-compatibility';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
 import 'leaflet/dist/leaflet.css';
+import { Controls } from './Controls';
 
 const Map = () => {
   const { theme } = useTheme();
@@ -23,6 +24,8 @@ const Map = () => {
           attribution='© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a></strong>'
           url={`/api/map/{z}/{x}/{y}?theme=${theme}`}
         />
+
+        <Controls />
       </MapContainer>
     </div>
   );
