@@ -1,8 +1,10 @@
 'use client';
 
+import { Map as LMap } from 'leaflet';
 import { useTheme } from 'next-themes';
 import { MapContainer, TileLayer } from 'react-leaflet';
 
+import { useMap } from '@/context/Map';
 import 'leaflet-defaulticon-compatibility';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
 import 'leaflet/dist/leaflet.css';
@@ -10,10 +12,12 @@ import { Controls } from './Controls';
 
 const Map = () => {
   const { theme } = useTheme();
+  const { setMap } = useMap();
 
   return (
     <div className="h-full w-full relative">
       <MapContainer
+        ref={(m) => setMap(m as LMap)}
         center={[51.505, -0.09]}
         zoom={17}
         className="h-full w-full !bg-background"
