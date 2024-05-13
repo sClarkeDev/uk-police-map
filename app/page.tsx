@@ -14,6 +14,7 @@ const HomePage = () => {
       <div className="hidden xl:flex w-[500px]">
         <Sidebar />
       </div>
+
       <MobileDrawer />
     </div>
   );

@@ -12,7 +12,7 @@ interface CrimeListItemProps {
 export const CrimeListItem = ({ crime, onClick }: CrimeListItemProps) => {
   return (
     <div
-      className="flex flex-row items-center justify-between border-l-[6px] pl-6 mx-8"
+      className="flex flex-row items-center justify-between border-l-[6px] pl-6 mx-4 xl:mx-8"
       style={{ borderColor: getCrimeColor(getCrimeSeverity(crime)) }}
     >
       <div className="space-y-1.5">

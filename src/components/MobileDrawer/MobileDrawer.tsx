@@ -1,20 +1,20 @@
 'use client';
 
+import { DrawerSnapPoint, useMap } from '@/context/Map';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
-import { useState } from 'react';
 import { CrimeList } from '../CrimeList';
 import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle } from '../ui/drawer';
 
 export const MobileDrawer = () => {
-  const [snap, setSnap] = useState<number | string | null>('100px');
+  const { drawerSnapPoint, setDrawerSnapPoint } = useMap();
   const isMobile = useMediaQuery('(max-width: 1280px)');
 
   return (
     <Drawer
       open={isMobile}
-      snapPoints={['40px', '100px', 1]}
-      activeSnapPoint={snap}
-      setActiveSnapPoint={setSnap}
+      snapPoints={['40px', '100px', 0.8]}
+      activeSnapPoint={drawerSnapPoint}
+      setActiveSnapPoint={(point) => setDrawerSnapPoint(point as DrawerSnapPoint)}
       dismissible={false}
       modal={false}
     >
@@ -24,7 +24,7 @@ export const MobileDrawer = () => {
           <DrawerDescription>London</DrawerDescription>
         </DrawerHeader>
 
-        <div data-vaul-no-drag className="overflow-y-auto flex-1">
+        <div data-vaul-no-drag className="mt-6 overflow-y-auto flex-1">
           <CrimeList />
         </div>
       </DrawerContent>

@@ -60,9 +60,8 @@ const Map = () => {
         {userLocation && <Marker position={userLocation.latlng} />}
 
         <Events />
+        <Controls />
       </MapContainer>
-
-      <Controls />
     </div>
   );
 };
