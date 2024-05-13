@@ -3,7 +3,9 @@
 import { DrawerSnapPoint, useMap } from '@/context/Map';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { CrimeList } from '../CrimeList';
+import { ForceDialog } from '../ForceDialog';
 import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle } from '../ui/drawer';
+import { Separator } from '../ui/separator';
 
 export const MobileDrawer = () => {
   const { drawerSnapPoint, setDrawerSnapPoint } = useMap();
@@ -20,11 +22,15 @@ export const MobileDrawer = () => {
     >
       <DrawerContent>
         <DrawerHeader>
-          <DrawerTitle>West Midlands Police</DrawerTitle>
+          <DrawerTitle asChild>
+            <ForceDialog />
+          </DrawerTitle>
           <DrawerDescription>London</DrawerDescription>
         </DrawerHeader>
 
-        <div data-vaul-no-drag className="mt-6 overflow-y-auto flex-1">
+        <Separator />
+
+        <div data-vaul-no-drag className="mt-6 overflow-y-auto flex-1 space-y-4">
           <CrimeList />
         </div>
       </DrawerContent>
