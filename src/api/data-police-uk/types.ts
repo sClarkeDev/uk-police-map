@@ -53,7 +53,7 @@ export type CrimeDate = {
   date: string;
 };
 
-export type Crime = {
+export interface Crime {
   category: string;
   location_type: string;
   location: {
@@ -70,4 +70,8 @@ export type Crime = {
   id: number;
   location_subtype: string;
   month: string;
-};
+}
+
+export interface NestedCrime extends Crime {
+  sameLocation: Crime[];
+}

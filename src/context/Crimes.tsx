@@ -1,21 +1,22 @@
 'use client';
 
 import {
-  Crime,
   CrimeDate,
   ForceData,
   Item,
   Neighborhood,
+  NestedCrime,
   getCrimeDates,
   getCrimesInBounds,
   getForces
 } from '@/api/data-police-uk';
+import { parseSameLocationCrimes } from '@/utils/crime';
 import { LatLngBounds } from 'leaflet';
 import { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import { useMap } from './Map';
 
 type CrimesContextType = {
-  crimes: Crime[];
+  crimes: NestedCrime[];
   updateCrimes: (bounds: LatLngBounds) => void;
   forces: Item[];
   force: { force: ForceData; neighbourhood: Neighborhood } | null;
@@ -44,7 +45,7 @@ export const CrimesProvider: React.FC<CrimesProviderProps> = ({ children }) => {
   const { map } = useMap();
 
   const [state, setState] = useState<{
-    crimes: Crime[];
+    crimes: NestedCrime[];
     forces: Item[];
     force: { force: ForceData; neighbourhood: Neighborhood } | null;
     dates: CrimeDate[];
@@ -68,7 +69,7 @@ export const CrimesProvider: React.FC<CrimesProviderProps> = ({ children }) => {
     async (bounds: LatLngBounds) => {
       try {
         const crimes = await getCrimesInBounds(bounds, state.selectedDate);
-        setState((old) => ({ ...old, crimes }));
+        setState((old) => ({ ...old, crimes: parseSameLocationCrimes(crimes) }));
       } catch (error) {
         console.error(error);
       }

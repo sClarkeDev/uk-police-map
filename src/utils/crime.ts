@@ -1,4 +1,4 @@
-import { Crime, CrimeSeverity, Item } from '@/api/data-police-uk';
+import { Crime, CrimeSeverity, Item, NestedCrime } from '@/api/data-police-uk';
 
 import categories from '@/assets/categories.json';
 import { BLUE, RED, YELLOW } from '@/constants/colors';
@@ -29,4 +29,32 @@ export const getCrimeColor = (severity: CrimeSeverity) => {
     case 'high':
       return RED;
   }
+};
+
+export const parseSameLocationCrimes = (crimes: Crime[]) => {
+  crimes.sort((a, b) => {
+    const aseverity = getCrimeSeverity(a);
+    const bseverity = getCrimeSeverity(b);
+
+    if (aseverity === 'high') return -1;
+    if (bseverity === 'high') return 1;
+    if (aseverity === 'medium') return -1;
+    if (bseverity === 'medium') return 1;
+    return 0;
+  });
+
+  const groupedCrimes: NestedCrime[] = [];
+  crimes.forEach((crime) => {
+    const existingGroup = groupedCrimes.find(
+      (group) =>
+        group.location.latitude === crime.location.latitude && group.location.longitude === crime.location.longitude
+    );
+    if (existingGroup) {
+      existingGroup.sameLocation.push(crime);
+    } else {
+      groupedCrimes.push({ ...crime, sameLocation: [] });
+    }
+  });
+
+  return groupedCrimes;
 };
