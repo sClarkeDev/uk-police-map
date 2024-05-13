@@ -6,6 +6,7 @@ import { MapContainer, Marker, TileLayer, useMapEvents } from 'react-leaflet';
 
 import { useCrimes } from '@/context/Crimes';
 import { useMap } from '@/context/Map';
+import { parseSameLocationCrimes } from '@/utils/crime';
 import 'leaflet-defaulticon-compatibility';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
 import 'leaflet/dist/leaflet.css';
@@ -53,7 +54,7 @@ const Map = () => {
           url={`/api/map/{z}/{x}/{y}?theme=${theme}`}
         />
 
-        {crimes.map((crime) => (
+        {parseSameLocationCrimes(crimes).map((crime) => (
           <CrimeMarker key={crime.id} crime={crime} />
         ))}
 

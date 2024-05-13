@@ -2,6 +2,7 @@
 
 import { DrawerSnapPoint, useMap } from '@/context/Map';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
+import { CrimeBarChart } from '../CrimeBarChart';
 import { CrimeList } from '../CrimeList';
 import { ForceDialog } from '../ForceDialog';
 import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle } from '../ui/drawer';
@@ -21,11 +22,15 @@ export const MobileDrawer = () => {
       modal={false}
     >
       <DrawerContent>
-        <DrawerHeader>
-          <DrawerTitle asChild>
-            <ForceDialog />
-          </DrawerTitle>
-          <DrawerDescription>London</DrawerDescription>
+        <DrawerHeader className="flex items-center justify-between">
+          <div>
+            <DrawerTitle asChild>
+              <ForceDialog />
+            </DrawerTitle>
+            <DrawerDescription>London</DrawerDescription>
+          </div>
+
+          <CrimeBarChart />
         </DrawerHeader>
 
         <Separator />
