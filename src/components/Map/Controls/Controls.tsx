@@ -1,3 +1,4 @@
+import { CrimeCategoryChart } from '@/components/CrimeCategoryChart';
 import { ForceDialog } from '@/components/ForceDialog';
 import { DateSelect } from './DateSelect';
 import { LocateControl } from './LocateControl';
@@ -21,6 +22,10 @@ export const Controls = () => {
             <ZoomControl />
           </div>
         </div>
+      </div>
+
+      <div className="hidden xl:block absolute bottom-0 left-0 right-0">
+        <CrimeCategoryChart />
       </div>
     </div>
   );

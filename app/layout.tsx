@@ -1,10 +1,11 @@
 import { ThemeProvider } from '@/context/Theme';
 import { cn } from '@/utils/cn';
 import type { Metadata } from 'next';
-import { Inter as FontSans } from 'next/font/google';
+import { Poppins } from 'next/font/google';
 import './globals.css';
 
-const fontSans = FontSans({
+const montserrat = Poppins({
+  weight: ['300', '400', '500', '700', '800'],
   subsets: ['latin'],
   variable: '--font-sans'
 });
@@ -21,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn('min-h-screen bg-background font-sans antialiased', fontSans.variable)}>
+      <body className={cn('min-h-screen bg-background font-sans antialiased', montserrat.variable)}>
         <ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange>
           {children}
         </ThemeProvider>
