@@ -19,6 +19,7 @@ const Map = () => {
   const { theme } = useTheme();
   const map = useMapStore((state) => state.map);
   const setMap = useMapStore((state) => state.setMap);
+  const setSidebarVisible = useMapStore((state) => state.setSidebarVisible);
   const crimes = useCrimeStore((state) => state.crimes);
   const updateCrimes = useCrimeStore((state) => state.updateCrimes);
 
@@ -32,10 +33,18 @@ const Map = () => {
         updateCrimes(map.getBounds());
       },
       zoomend() {
-        if (map.getZoom() < MIN_CRIME_ZOOM) {
-          setCrimesVisible(false);
-        } else {
+        if (map.getZoom() >= MIN_CRIME_ZOOM) {
           setCrimesVisible(true);
+          setSidebarVisible(true);
+          setTimeout(() => {
+            map.invalidateSize({ animate: true });
+          }, 100);
+        } else {
+          setCrimesVisible(false);
+          setSidebarVisible(false);
+          setTimeout(() => {
+            map.invalidateSize({ animate: true });
+          }, 100);
         }
       },
       locationfound(e) {

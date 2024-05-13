@@ -1,5 +1,6 @@
 import { CrimeCategoryChart } from '@/components/CrimeCategoryChart';
 import { ForceDialog } from '@/components/ForceDialog';
+import { useMapStore } from '@/stores/map';
 import { DateSelect } from './DateSelect';
 import { Key } from './Key';
 import { LocateControl } from './LocateControl';
@@ -7,6 +8,8 @@ import { ThemeToggle } from './ThemeToggle';
 import { ZoomControl } from './ZoomControl';
 
 export const Controls = () => {
+  const sidebarVisible = useMapStore((state) => state.sidebarVisible);
+
   return (
     <div className="absolute top-0 left-0 right-0 bottom-0 m-4 lg:m-6 pointer-events-none" style={{ zIndex: 9999 }}>
       <div className="flex justify-end xl:justify-between">
@@ -25,13 +28,15 @@ export const Controls = () => {
         </div>
       </div>
 
-      <div className="hidden xl:flex absolute bottom-0 left-0 right-0 justify-between space-x-6">
-        <Key />
+      {sidebarVisible && (
+        <div className="hidden xl:flex absolute bottom-0 left-0 right-0 justify-between space-x-6">
+          <Key />
 
-        <div className="flex-1">
-          <CrimeCategoryChart />
+          <div className="flex-1">
+            <CrimeCategoryChart />
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

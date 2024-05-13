@@ -1,1 +1,1 @@
-export const MIN_CRIME_ZOOM = 15;
+export const MIN_CRIME_ZOOM = 16;

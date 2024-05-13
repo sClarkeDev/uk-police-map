@@ -7,7 +7,7 @@ const KeyItem = ({ text, color }: { text: string; color: string }) => {
         className="w-3 h-3 rounded-full flex items-center justify-center"
         style={{ boxShadow: `0 0 8px 0 ${color}`, backgroundColor: `${color}` }}
       />
-      <p className="text-base text-muted-foreground">{text}</p>
+      <p className="text-base">{text}</p>
     </div>
   );
 };
