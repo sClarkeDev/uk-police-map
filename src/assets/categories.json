@@ -1,0 +1,17 @@
+[
+  { "url": "all-crime", "name": "All crime", "severity": "medium" },
+  { "url": "anti-social-behaviour", "name": "Anti-social behaviour", "severity": "low" },
+  { "url": "bicycle-theft", "name": "Bicycle theft", "severity": "low" },
+  { "url": "burglary", "name": "Burglary", "severity": "medium" },
+  { "url": "criminal-damage-arson", "name": "Criminal damage and arson", "severity": "low" },
+  { "url": "drugs", "name": "Drugs", "severity": "low" },
+  { "url": "other-theft", "name": "Other theft", "severity": "low" },
+  { "url": "possession-of-weapons", "name": "Possession of weapons", "severity": "medium" },
+  { "url": "public-order", "name": "Public order", "severity": "low" },
+  { "url": "robbery", "name": "Robbery", "severity": "high" },
+  { "url": "shoplifting", "name": "Shoplifting", "severity": "medium" },
+  { "url": "theft-from-the-person", "name": "Theft from the person", "severity": "medium" },
+  { "url": "vehicle-crime", "name": "Vehicle crime", "severity": "medium" },
+  { "url": "violent-crime", "name": "Violence and sexual offences", "severity": "high" },
+  { "url": "other-crime", "name": "Other crime", "severity": "low" }
+]

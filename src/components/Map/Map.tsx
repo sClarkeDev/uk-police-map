@@ -2,17 +2,30 @@
 
 import { Map as LMap } from 'leaflet';
 import { useTheme } from 'next-themes';
-import { MapContainer, TileLayer } from 'react-leaflet';
+import { MapContainer, TileLayer, useMapEvents } from 'react-leaflet';
 
+import { useCrimes } from '@/context/Crimes';
 import { useMap } from '@/context/Map';
 import 'leaflet-defaulticon-compatibility';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
 import 'leaflet/dist/leaflet.css';
+import { CrimeMarker } from '../CrimeMarker';
 import { Controls } from './Controls';
 
 const Map = () => {
   const { theme } = useTheme();
   const { setMap } = useMap();
+  const { crimes, updateCrimes } = useCrimes();
+
+  const Events = () => {
+    const map = useMapEvents({
+      dragend() {
+        updateCrimes(map.getBounds());
+      }
+    });
+
+    return null;
+  };
 
   return (
     <div className="h-full w-full relative">
@@ -29,7 +42,12 @@ const Map = () => {
           url={`/api/map/{z}/{x}/{y}?theme=${theme}`}
         />
 
+        {crimes.map((crime) => (
+          <CrimeMarker key={crime.id} crime={crime} />
+        ))}
+
         <Controls />
+        <Events />
       </MapContainer>
     </div>
   );

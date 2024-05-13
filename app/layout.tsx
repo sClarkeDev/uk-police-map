@@ -1,3 +1,4 @@
+import { CrimesProvider } from '@/context/Crimes';
 import { MapProvider } from '@/context/Map';
 import { ThemeProvider } from '@/context/Theme';
 import { cn } from '@/utils/cn';
@@ -24,7 +25,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={cn('min-h-screen bg-background font-sans antialiased', fontSans.variable)}>
         <ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange>
-          <MapProvider>{children}</MapProvider>
+          <MapProvider>
+            <CrimesProvider>{children}</CrimesProvider>
+          </MapProvider>
         </ThemeProvider>
       </body>
     </html>
