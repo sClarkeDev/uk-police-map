@@ -24,7 +24,7 @@ export const MobileDrawer = () => {
           <DrawerDescription>London</DrawerDescription>
         </DrawerHeader>
 
-        <div className="overflow-y-auto flex-1">
+        <div data-vaul-no-drag className="overflow-y-auto flex-1">
           <CrimeList />
         </div>
       </DrawerContent>
