@@ -7,7 +7,7 @@ const Map = dynamic(() => import('@/components/Map/Map'), { ssr: false });
 const HomePage = () => {
   return (
     <div className="h-full w-full flex overflow-hidden">
-      <div className="hidden xl:flex w-[500px]">
+      <div className="hidden xl:flex w-[450px]">
         <Sidebar />
       </div>
       <div className="flex-1">

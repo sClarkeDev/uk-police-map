@@ -1,6 +1,7 @@
 import { CrimeCategoryChart } from '@/components/CrimeCategoryChart';
 import { ForceDialog } from '@/components/ForceDialog';
 import { DateSelect } from './DateSelect';
+import { Key } from './Key';
 import { LocateControl } from './LocateControl';
 import { ThemeToggle } from './ThemeToggle';
 import { ZoomControl } from './ZoomControl';
@@ -24,8 +25,12 @@ export const Controls = () => {
         </div>
       </div>
 
-      <div className="hidden xl:block absolute bottom-0 left-0 right-0">
-        <CrimeCategoryChart />
+      <div className="hidden xl:flex absolute bottom-0 left-0 right-0 justify-between space-x-6">
+        <Key />
+
+        <div className="flex-1">
+          <CrimeCategoryChart />
+        </div>
       </div>
     </div>
   );

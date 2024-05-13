@@ -34,7 +34,7 @@ export const CrimeCategoryChart = () => {
   }, [crimes]);
 
   return (
-    <div className="w-full h-48 flex flex-col py-4 px-5 bg-background/80 rounded-md border pointer-events-auto space-y-4">
+    <div className="w-full h-48 flex flex-col py-4 px-5 bg-background/80 backdrop-blur-md rounded-lg border pointer-events-auto space-y-4">
       <p className="text-lg">Crime Category Ratio</p>
       <div className="flex-1">
         <ResponsiveContainer height="100%" width="100%">
