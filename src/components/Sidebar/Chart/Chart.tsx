@@ -1,6 +1,6 @@
 import { Cell, Label, Pie, PieChart, ResponsiveContainer } from 'recharts';
 
-import { useCrimes } from '@/context/Crimes';
+import { useCrimeStore } from '@/stores/crimes';
 
 export type ChartItem = {
   name: string;
@@ -13,7 +13,7 @@ interface ChartProps {
 }
 
 export const Chart = ({ items }: ChartProps) => {
-  const { crimes } = useCrimes();
+  const crimes = useCrimeStore((state) => state.crimes);
 
   return (
     <ResponsiveContainer width="100%" height="100%">

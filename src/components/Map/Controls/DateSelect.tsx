@@ -1,8 +1,15 @@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { useCrimes } from '@/context/Crimes';
+import { useCrimeStore } from '@/stores/crimes';
+import { useShallow } from 'zustand/react/shallow';
 
 export const DateSelect = () => {
-  const { dates, selectedDate, setSelectedDate } = useCrimes();
+  const { dates, selectedDate, setSelectedDate } = useCrimeStore(
+    useShallow((state) => ({
+      dates: state.dates,
+      selectedDate: state.selectedDate,
+      setSelectedDate: state.setSelectedDate
+    }))
+  );
 
   return (
     <Select value={selectedDate} onValueChange={(value) => setSelectedDate(value)}>

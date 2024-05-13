@@ -7,7 +7,7 @@ import { ImFlickr2 } from 'react-icons/im';
 import { ForceEngagementMethod } from '@/api/data-police-uk';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { useCrimes } from '@/context/Crimes';
+import { useCrimeStore } from '@/stores/crimes';
 
 const SocialButton = ({ item }: { item: ForceEngagementMethod }) => {
   let icon = null;
@@ -48,7 +48,7 @@ const SocialButton = ({ item }: { item: ForceEngagementMethod }) => {
 };
 
 export const ForceDialog = () => {
-  const { force } = useCrimes();
+  const force = useCrimeStore((state) => state.force);
 
   if (!force) return null;
 

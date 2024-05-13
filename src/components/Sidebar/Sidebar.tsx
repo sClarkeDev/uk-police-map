@@ -1,14 +1,14 @@
 'use client';
 
 import { BLUE, RED, YELLOW } from '@/constants/colors';
-import { useCrimes } from '@/context/Crimes';
+import { useCrimeStore } from '@/stores/crimes';
 import { getCrimeSeverity } from '@/utils/crime';
 import { useEffect, useState } from 'react';
 import { CrimeList } from '../CrimeList';
 import { Chart, ChartItem } from './Chart';
 
 export const Sidebar = () => {
-  const { crimes } = useCrimes();
+  const crimes = useCrimeStore((state) => state.crimes);
 
   const [chartItems, setChartItems] = useState<ChartItem[]>([]);
 

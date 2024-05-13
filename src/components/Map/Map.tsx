@@ -4,7 +4,7 @@ import { Map as LMap, LatLng } from 'leaflet';
 import { useTheme } from 'next-themes';
 import { MapContainer, Marker, TileLayer, useMapEvents } from 'react-leaflet';
 
-import { useCrimes } from '@/context/Crimes';
+import { useCrimeStore } from '@/stores/crimes';
 import { useMapStore } from '@/stores/map';
 import { parseSameLocationCrimes } from '@/utils/crime';
 import 'leaflet-defaulticon-compatibility';
@@ -17,8 +17,10 @@ import { MIN_CRIME_ZOOM } from './constants';
 
 const Map = () => {
   const { theme } = useTheme();
+  const map = useMapStore((state) => state.map);
   const setMap = useMapStore((state) => state.setMap);
-  const { crimes, updateCrimes } = useCrimes();
+  const crimes = useCrimeStore((state) => state.crimes);
+  const updateCrimes = useCrimeStore((state) => state.updateCrimes);
 
   const [userLocation, setUserLocation] = useState<{ latlng: LatLng; accuracy: number } | null>();
   const [crimesVisible, setCrimesVisible] = useState(true);

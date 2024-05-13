@@ -1,11 +1,11 @@
 import { BLUE, RED, YELLOW } from '@/constants/colors';
-import { useCrimes } from '@/context/Crimes';
+import { useCrimeStore } from '@/stores/crimes';
 import { getCrimeSeverity } from '@/utils/crime';
 import { useMemo } from 'react';
 import { Bar, BarChart, Cell } from 'recharts';
 
 export const CrimeBarChart = () => {
-  const { crimes } = useCrimes();
+  const crimes = useCrimeStore((state) => state.crimes);
 
   const data = useMemo(() => {
     const lowCount = crimes.filter((crime) => getCrimeSeverity(crime) === 'low').length;
