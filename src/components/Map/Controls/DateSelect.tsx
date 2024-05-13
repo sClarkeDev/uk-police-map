@@ -6,7 +6,7 @@ export const DateSelect = () => {
 
   return (
     <Select value={selectedDate} onValueChange={(value) => setSelectedDate(value)}>
-      <SelectTrigger className="w-[110px] pointer-events-auto">
+      <SelectTrigger className="w-[104px] pointer-events-auto">
         <SelectValue placeholder="Select a date" />
       </SelectTrigger>
       <SelectContent className="pointer-events-auto" style={{ zIndex: 99999 }}>

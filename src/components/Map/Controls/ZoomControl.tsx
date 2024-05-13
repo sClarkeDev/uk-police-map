@@ -11,7 +11,7 @@ export const ZoomControl = () => {
   const onClickZoomOut = () => map?.zoomOut();
 
   return (
-    <div className="flex flex-col space-y-2">
+    <div className="flex flex-col space-y-3">
       <Button size="icon" variant="outline" onClick={onClickZoomIn}>
         <Plus className="h-4 w-4" />
       </Button>
