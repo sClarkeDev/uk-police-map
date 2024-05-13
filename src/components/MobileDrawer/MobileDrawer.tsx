@@ -2,17 +2,17 @@
 
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useState } from 'react';
-import { Button } from '../ui/button';
-import { Drawer, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle } from '../ui/drawer';
+import { CrimeList } from '../CrimeList';
+import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle } from '../ui/drawer';
 
 export const MobileDrawer = () => {
-  const [snap, setSnap] = useState<number | string | null>('110px');
+  const [snap, setSnap] = useState<number | string | null>('100px');
   const isMobile = useMediaQuery('(max-width: 1024px)');
 
   return (
     <Drawer
       open={isMobile}
-      snapPoints={['110px', 1]}
+      snapPoints={['40px', '100px', 1]}
       activeSnapPoint={snap}
       setActiveSnapPoint={setSnap}
       dismissible={false}
@@ -23,9 +23,10 @@ export const MobileDrawer = () => {
           <DrawerTitle>West Midlands Police</DrawerTitle>
           <DrawerDescription>London</DrawerDescription>
         </DrawerHeader>
-        <DrawerFooter>
-          <Button>Submit</Button>
-        </DrawerFooter>
+
+        <div className="overflow-y-auto flex-1">
+          <CrimeList />
+        </div>
       </DrawerContent>
     </Drawer>
   );
