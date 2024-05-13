@@ -7,7 +7,7 @@ import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle } f
 
 export const MobileDrawer = () => {
   const [snap, setSnap] = useState<number | string | null>('100px');
-  const isMobile = useMediaQuery('(max-width: 1024px)');
+  const isMobile = useMediaQuery('(max-width: 1280px)');
 
   return (
     <Drawer

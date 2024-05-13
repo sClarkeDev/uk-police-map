@@ -11,7 +11,7 @@ const HomePage = () => {
         <Map />
       </div>
 
-      <div className="hidden lg:flex w-[500px]">
+      <div className="hidden xl:flex w-[500px]">
         <Sidebar />
       </div>
       <MobileDrawer />

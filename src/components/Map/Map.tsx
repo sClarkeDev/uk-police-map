@@ -1,14 +1,15 @@
 'use client';
 
-import { Map as LMap } from 'leaflet';
+import { Map as LMap, LatLng } from 'leaflet';
 import { useTheme } from 'next-themes';
-import { MapContainer, TileLayer, useMapEvents } from 'react-leaflet';
+import { MapContainer, Marker, TileLayer, useMapEvents } from 'react-leaflet';
 
 import { useCrimes } from '@/context/Crimes';
 import { useMap } from '@/context/Map';
 import 'leaflet-defaulticon-compatibility';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
 import 'leaflet/dist/leaflet.css';
+import { useState } from 'react';
 import { CrimeMarker } from '../CrimeMarker';
 import { Controls } from './Controls';
 
@@ -16,11 +17,21 @@ const Map = () => {
   const { theme } = useTheme();
   const { setMap } = useMap();
   const { crimes, updateCrimes } = useCrimes();
+  const [userLocation, setUserLocation] = useState<{ latlng: LatLng; accuracy: number } | null>();
 
   const Events = () => {
     const map = useMapEvents({
       dragend() {
         updateCrimes(map.getBounds());
+      },
+      locationfound(e) {
+        setUserLocation({ latlng: e.latlng, accuracy: e.accuracy });
+        map?.flyTo(e.latlng, 18, {
+          animate: true
+        });
+      },
+      locationerror(e) {
+        alert(e.message);
       }
     });
 
@@ -45,6 +56,8 @@ const Map = () => {
         {crimes.map((crime) => (
           <CrimeMarker key={crime.id} crime={crime} />
         ))}
+
+        {userLocation && <Marker position={userLocation.latlng} />}
 
         <Controls />
         <Events />
