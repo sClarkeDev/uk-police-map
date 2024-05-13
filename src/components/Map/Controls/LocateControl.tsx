@@ -1,10 +1,10 @@
 import { Locate } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import { useMap } from '@/context/Map';
+import { useMapStore } from '@/stores/map';
 
 export const LocateControl = () => {
-  const { map } = useMap();
+  const map = useMapStore((state) => state.map);
 
   const onClick = () => map?.locate({ setView: false, enableHighAccuracy: true });
 

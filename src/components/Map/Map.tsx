@@ -5,7 +5,7 @@ import { useTheme } from 'next-themes';
 import { MapContainer, Marker, TileLayer, useMapEvents } from 'react-leaflet';
 
 import { useCrimes } from '@/context/Crimes';
-import { useMap } from '@/context/Map';
+import { useMapStore } from '@/stores/map';
 import { parseSameLocationCrimes } from '@/utils/crime';
 import 'leaflet-defaulticon-compatibility';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
@@ -13,17 +13,28 @@ import 'leaflet/dist/leaflet.css';
 import { useState } from 'react';
 import { CrimeMarker } from '../CrimeMarker';
 import { Controls } from './Controls';
+import { MIN_CRIME_ZOOM } from './constants';
 
 const Map = () => {
   const { theme } = useTheme();
-  const { setMap } = useMap();
+  const setMap = useMapStore((state) => state.setMap);
   const { crimes, updateCrimes } = useCrimes();
+
   const [userLocation, setUserLocation] = useState<{ latlng: LatLng; accuracy: number } | null>();
+  const [crimesVisible, setCrimesVisible] = useState(true);
 
   const Events = () => {
     const map = useMapEvents({
       dragend() {
+        if (map.getZoom() < MIN_CRIME_ZOOM) return;
         updateCrimes(map.getBounds());
+      },
+      zoomend() {
+        if (map.getZoom() < MIN_CRIME_ZOOM) {
+          setCrimesVisible(false);
+        } else {
+          setCrimesVisible(true);
+        }
       },
       locationfound(e) {
         setUserLocation({ latlng: e.latlng, accuracy: e.accuracy });
@@ -54,9 +65,7 @@ const Map = () => {
           url={`/api/map/{z}/{x}/{y}?theme=${theme}`}
         />
 
-        {parseSameLocationCrimes(crimes).map((crime) => (
-          <CrimeMarker key={crime.id} crime={crime} />
-        ))}
+        {crimesVisible && parseSameLocationCrimes(crimes).map((crime) => <CrimeMarker key={crime.id} crime={crime} />)}
 
         {userLocation && <Marker position={userLocation.latlng} />}
 

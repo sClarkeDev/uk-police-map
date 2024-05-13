@@ -1,10 +1,13 @@
 import { Crime } from '@/api/data-police-uk';
 import { useCrimes } from '@/context/Crimes';
-import { useMap } from '@/context/Map';
+import { useMapStore } from '@/stores/map';
+import { useShallow } from 'zustand/react/shallow';
 import { CrimeListItem } from './CrimeListItem';
 
 export const CrimeList = () => {
-  const { map, setDrawerSnapPoint } = useMap();
+  const { map, setDrawerSnapPoint } = useMapStore(
+    useShallow((state) => ({ map: state.map, setDrawerSnapPoint: state.setDrawerSnapPoint }))
+  );
   const { crimes } = useCrimes();
 
   const onClickCrime = (crime: Crime) => {

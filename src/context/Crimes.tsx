@@ -11,9 +11,9 @@ import {
   getForces,
   locateNeighbourhood
 } from '@/api/data-police-uk';
+import { useMapStore } from '@/stores/map';
 import { LatLngBounds } from 'leaflet';
 import { createContext, useCallback, useContext, useEffect, useState } from 'react';
-import { useMap } from './Map';
 
 type CrimesContextType = {
   crimes: Crime[];
@@ -42,7 +42,7 @@ type CrimesProviderProps = {
 };
 
 export const CrimesProvider: React.FC<CrimesProviderProps> = ({ children }) => {
-  const { map } = useMap();
+  const map = useMapStore((state) => state.map);
 
   const [state, setState] = useState<{
     crimes: Crime[];

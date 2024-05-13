@@ -1,7 +1,9 @@
 'use client';
 
-import { DrawerSnapPoint, useMap } from '@/context/Map';
+import { DrawerSnapPoint } from '@/context/Map';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
+import { useMapStore } from '@/stores/map';
+import { useShallow } from 'zustand/react/shallow';
 import { CrimeBarChart } from '../CrimeBarChart';
 import { CrimeList } from '../CrimeList';
 import { ForceDialog } from '../ForceDialog';
@@ -9,7 +11,9 @@ import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle } f
 import { Separator } from '../ui/separator';
 
 export const MobileDrawer = () => {
-  const { drawerSnapPoint, setDrawerSnapPoint } = useMap();
+  const { drawerSnapPoint, setDrawerSnapPoint } = useMapStore(
+    useShallow((state) => ({ drawerSnapPoint: state.drawerSnapPoint, setDrawerSnapPoint: state.setDrawerSnapPoint }))
+  );
   const isMobile = useMediaQuery('(max-width: 1280px)');
 
   return (

@@ -1,10 +1,10 @@
 import { Minus, Plus } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import { useMap } from '@/context/Map';
+import { useMapStore } from '@/stores/map';
 
 export const ZoomControl = () => {
-  const { map } = useMap();
+  const map = useMapStore((state) => state.map);
 
   const onClickZoomIn = () => map?.zoomIn();
 
