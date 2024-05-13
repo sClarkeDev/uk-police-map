@@ -1,6 +1,15 @@
 'use client';
 
-import { Crime, ForceData, Item, Neighborhood, getCrimesInBounds, getForces } from '@/api/data-police-uk';
+import {
+  Crime,
+  CrimeDate,
+  ForceData,
+  Item,
+  Neighborhood,
+  getCrimeDates,
+  getCrimesInBounds,
+  getForces
+} from '@/api/data-police-uk';
 import { LatLngBounds } from 'leaflet';
 import { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import { useMap } from './Map';
@@ -10,13 +19,19 @@ type CrimesContextType = {
   updateCrimes: (bounds: LatLngBounds) => void;
   forces: Item[];
   force: { force: ForceData; neighbourhood: Neighborhood } | null;
+  dates: CrimeDate[];
+  selectedDate: string;
+  setSelectedDate: (date: string) => void;
 };
 
 const CrimesContext = createContext<CrimesContextType>({
   crimes: [],
   updateCrimes: () => {},
   forces: [],
-  force: null
+  force: null,
+  dates: [],
+  selectedDate: '',
+  setSelectedDate: () => {}
 });
 
 export const useCrimes = () => useContext(CrimesContext);
@@ -32,27 +47,34 @@ export const CrimesProvider: React.FC<CrimesProviderProps> = ({ children }) => {
     crimes: Crime[];
     forces: Item[];
     force: { force: ForceData; neighbourhood: Neighborhood } | null;
+    dates: CrimeDate[];
+    selectedDate: string;
   }>({
     crimes: [],
     force: null,
-    forces: []
+    forces: [],
+    dates: [],
+    selectedDate: ''
   });
   useEffect(() => {
     getInitalData()
-      .then(({ forces }) => {
-        setState((old) => ({ ...old, forces }));
+      .then(({ forces, dates }) => {
+        setState((old) => ({ ...old, forces, dates, selectedDate: dates[0].date }));
       })
       .catch((err) => console.error(err));
   }, []);
 
-  const updateCrimes = useCallback(async (bounds: LatLngBounds) => {
-    try {
-      const crimes = await getCrimesInBounds(bounds, '2024-01');
-      setState((old) => ({ ...old, crimes }));
-    } catch (error) {
-      console.error(error);
-    }
-  }, []);
+  const updateCrimes = useCallback(
+    async (bounds: LatLngBounds) => {
+      try {
+        const crimes = await getCrimesInBounds(bounds, state.selectedDate);
+        setState((old) => ({ ...old, crimes }));
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    [state.selectedDate]
+  );
 
   useEffect(() => {
     if (!map) return;
@@ -60,13 +82,18 @@ export const CrimesProvider: React.FC<CrimesProviderProps> = ({ children }) => {
     updateCrimes(map.getBounds());
   }, [map, updateCrimes]);
 
+  const updateSelectedDate = (value: string) => setState((old) => ({ ...old, selectedDate: value }));
+
   return (
     <CrimesContext.Provider
       value={{
         crimes: state.crimes,
         updateCrimes,
         force: state.force,
-        forces: state.forces
+        forces: state.forces,
+        dates: state.dates,
+        selectedDate: state.selectedDate,
+        setSelectedDate: updateSelectedDate
       }}
     >
       {children}
@@ -76,6 +103,7 @@ export const CrimesProvider: React.FC<CrimesProviderProps> = ({ children }) => {
 
 const getInitalData = async () => {
   const forces = await getForces();
+  const dates = await getCrimeDates();
 
-  return { forces };
+  return { dates, forces };
 };

@@ -49,6 +49,10 @@ export type CrimeCategory = {
 
 export type CrimeSeverity = 'low' | 'medium' | 'high';
 
+export type CrimeDate = {
+  date: string;
+};
+
 export type Crime = {
   category: string;
   location_type: string;
