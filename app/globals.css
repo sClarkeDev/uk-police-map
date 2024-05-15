@@ -64,3 +64,16 @@ body {
   }
 }
 
+mapbox-geocoder > div {
+  height: 2.5rem;
+}
+
+mapbox-geocoder > div > input {
+  color: hls(var(--foreground)) !important;
+}
+
+mapbox-geocoder > div > input:focus {
+  outline-style: none;
+  border: none !important;
+}
+
