@@ -9,7 +9,6 @@ const Map = dynamic(() => import('@/components/Map/Map'), { ssr: false });
 
 const HomePage = () => {
   const sidebarVisible = useMapStore((state) => state.sidebarVisible);
-
   const map = useMapStore((state) => state.map);
 
   return (

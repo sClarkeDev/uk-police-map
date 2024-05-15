@@ -1,7 +1,7 @@
 import { CrimeCategoryChart } from '@/components/CrimeCategoryChart';
+import { CrimePieChart } from '@/components/CrimePieChart';
 import { ForceDialog } from '@/components/ForceDialog';
 import { NeighbourhoodDialog } from '@/components/NeighbourhoodDialog';
-import { Chart } from '@/components/Sidebar/Chart';
 import { useCrimeStore } from '@/stores/crimes';
 import { useMapStore } from '@/stores/map';
 import { DateSelect } from './DateSelect';
@@ -38,7 +38,7 @@ export const Controls = () => {
             className="h-48 aspect-square bg-background/80 backdrop-blur rounded-lg border transition-opacity duration-300"
             style={{ opacity: crimes?.length ? 1 : 0 }}
           >
-            <Chart />
+            <CrimePieChart />
           </div>
 
           <div

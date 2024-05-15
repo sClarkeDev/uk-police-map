@@ -11,7 +11,7 @@ export type ChartItem = {
   fill: string;
 };
 
-export const Chart = () => {
+export const CrimePieChart = () => {
   const crimes = useCrimeStore((state) => state.crimes);
 
   const [chartItems, setChartItems] = useState<ChartItem[]>([]);
