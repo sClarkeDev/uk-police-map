@@ -1,6 +1,6 @@
 'use client';
 
-import { useMediaQuery } from '@/hooks/useMediaQuery';
+import { useMobile } from '@/hooks/useMobile';
 import { DrawerSnapPoint, useMapStore } from '@/stores/map';
 import { useShallow } from 'zustand/react/shallow';
 import { CrimeBarChart } from '../CrimeBarChart';
@@ -14,7 +14,7 @@ export const MobileDrawer = () => {
   const { drawerSnapPoint, setDrawerSnapPoint } = useMapStore(
     useShallow((state) => ({ drawerSnapPoint: state.drawerSnapPoint, setDrawerSnapPoint: state.setDrawerSnapPoint }))
   );
-  const isMobile = useMediaQuery('(max-width: 1280px)');
+  const isMobile = useMobile();
 
   return (
     <Drawer

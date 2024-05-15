@@ -10,6 +10,8 @@ const Map = dynamic(() => import('@/components/Map/Map'), { ssr: false });
 const HomePage = () => {
   const sidebarVisible = useMapStore((state) => state.sidebarVisible);
 
+  const map = useMapStore((state) => state.map);
+
   return (
     <div className="h-full w-full flex overflow-hidden">
       {sidebarVisible && (
@@ -22,7 +24,8 @@ const HomePage = () => {
         <Map />
       </div>
 
-      <MobileDrawer />
+      {/* Render Mobile Drawer after map is initalized to avoid tiling issues */}
+      {map && <MobileDrawer />}
     </div>
   );
 };
