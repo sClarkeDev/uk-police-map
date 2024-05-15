@@ -3,10 +3,12 @@ import {
   CrimeDate,
   ForceData,
   Item,
+  Neighborhood,
   getCrimeDates,
   getCrimesInBounds,
   getForce,
   getForces,
+  getNeighbourhood,
   locateNeighbourhood
 } from '@/api/data-police-uk';
 import { LatLngBounds } from 'leaflet';
@@ -21,6 +23,7 @@ interface CrimeState {
   setSelectedDate: (date: string) => void;
   crimes: Crime[];
   updateCrimes: (bounds: LatLngBounds) => void;
+  neighbourhood: Neighborhood | null;
 }
 
 export const useCrimeStore = create<CrimeState>((set, get) => ({
@@ -37,10 +40,12 @@ export const useCrimeStore = create<CrimeState>((set, get) => ({
     const crimes = await getCrimesInBounds(bounds, get().selectedDate);
     set({ crimes });
 
-    const neighbourhood = await locateNeighbourhood(bounds.getCenter());
-    const force = await getForce(neighbourhood.force);
-    set({ force });
-  }
+    const locatedNeighbourhood = await locateNeighbourhood(bounds.getCenter());
+    const force = await getForce(locatedNeighbourhood.force);
+    const neighbourhood = await getNeighbourhood(locatedNeighbourhood.force, locatedNeighbourhood.neighbourhood);
+    set({ force, neighbourhood });
+  },
+  neighbourhood: null
 }));
 
 const initStore = async () => {

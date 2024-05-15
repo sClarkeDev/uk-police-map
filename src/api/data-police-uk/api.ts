@@ -1,5 +1,5 @@
 import { LatLng, LatLngBounds } from 'leaflet';
-import { Crime, CrimeCategory, CrimeDate, ForceData, Item } from './types';
+import { Crime, CrimeCategory, CrimeDate, ForceData, Item, Neighborhood } from './types';
 
 const BASE_URL = 'https://data.police.uk/api';
 
@@ -21,6 +21,14 @@ export const getForce = async (forceId: string): Promise<ForceData> => {
 
 export const getNeighbourhoods = async (forceId: string): Promise<{ force: string; neighbourhood: string }[]> => {
   const url = `${BASE_URL}/${forceId}/neighbourhoods`;
+  const result = await fetch(url);
+  const json = await result.json();
+
+  return json;
+};
+
+export const getNeighbourhood = async (forceId: string, neighbourhoodId: string): Promise<Neighborhood> => {
+  const url = `${BASE_URL}/${forceId}/${neighbourhoodId}`;
   const result = await fetch(url);
   const json = await result.json();
 

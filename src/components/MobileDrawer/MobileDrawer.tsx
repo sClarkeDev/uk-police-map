@@ -1,12 +1,12 @@
 'use client';
 
-import { DrawerSnapPoint } from '@/context/Map';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
-import { useMapStore } from '@/stores/map';
+import { DrawerSnapPoint, useMapStore } from '@/stores/map';
 import { useShallow } from 'zustand/react/shallow';
 import { CrimeBarChart } from '../CrimeBarChart';
 import { CrimeList } from '../CrimeList';
 import { ForceDialog } from '../ForceDialog';
+import { NeighbourhoodDialog } from '../NeighbourhoodDialog';
 import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle } from '../ui/drawer';
 import { Separator } from '../ui/separator';
 
@@ -19,19 +19,21 @@ export const MobileDrawer = () => {
   return (
     <Drawer
       open={isMobile}
-      snapPoints={['40px', '100px', 0.8]}
+      snapPoints={['40px', '105px', 0.8]}
       activeSnapPoint={drawerSnapPoint}
       setActiveSnapPoint={(point) => setDrawerSnapPoint(point as DrawerSnapPoint)}
       dismissible={false}
       modal={false}
     >
       <DrawerContent>
-        <DrawerHeader className="flex items-center justify-between">
-          <div>
+        <DrawerHeader className="flex items-center justify-between mb-1.5">
+          <div className="flex flex-col space-y-2">
             <DrawerTitle asChild>
               <ForceDialog />
             </DrawerTitle>
-            <DrawerDescription>London</DrawerDescription>
+            <DrawerDescription asChild>
+              <NeighbourhoodDialog />
+            </DrawerDescription>
           </div>
 
           <CrimeBarChart />

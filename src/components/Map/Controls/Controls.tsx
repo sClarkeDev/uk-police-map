@@ -1,5 +1,6 @@
 import { CrimeCategoryChart } from '@/components/CrimeCategoryChart';
 import { ForceDialog } from '@/components/ForceDialog';
+import { NeighbourhoodDialog } from '@/components/NeighbourhoodDialog';
 import { Chart } from '@/components/Sidebar/Chart';
 import { useMapStore } from '@/stores/map';
 import { DateSelect } from './DateSelect';
@@ -14,8 +15,9 @@ export const Controls = () => {
   return (
     <div className="absolute top-0 left-0 right-0 bottom-0 m-4 lg:m-6 pointer-events-none" style={{ zIndex: 9999 }}>
       <div className="flex justify-end xl:justify-between">
-        <div className="hidden xl:block">
+        <div className="hidden xl:flex flex-col space-y-2">
           <ForceDialog />
+          <NeighbourhoodDialog />
         </div>
 
         <div className="flex space-x-3 xl:space-x-4">
