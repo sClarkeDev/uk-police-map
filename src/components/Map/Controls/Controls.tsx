@@ -3,7 +3,6 @@ import { CrimePieChart } from '@/components/CrimePieChart';
 import { ForceDialog } from '@/components/ForceDialog';
 import { NeighbourhoodDialog } from '@/components/NeighbourhoodDialog';
 import { useCrimeStore } from '@/stores/crimes';
-import { useMapStore } from '@/stores/map';
 
 import { DateSelect } from './DateSelect';
 import { LocateControl } from './LocateControl';
@@ -12,7 +11,6 @@ import { ThemeToggle } from './ThemeToggle';
 import { ZoomControl } from './ZoomControl';
 
 export const Controls = () => {
-  const sidebarVisible = useMapStore((state) => state.sidebarVisible);
   const crimes = useCrimeStore((state) => state.crimes);
 
   return (
@@ -35,23 +33,21 @@ export const Controls = () => {
         </div>
       </div>
 
-      {sidebarVisible && (
-        <div className="hidden xl:flex absolute bottom-0 left-0 right-0 justify-between space-x-6">
-          <div
-            className="h-48 aspect-square bg-background/80 backdrop-blur rounded-lg border transition-opacity duration-300"
-            style={{ opacity: crimes?.length ? 1 : 0 }}
-          >
-            <CrimePieChart />
-          </div>
-
-          <div
-            className="flex-1 bg-background/80 backdrop-blur rounded-lg border transition-opacity duration-300 pointer-events-auto"
-            style={{ opacity: crimes?.length ? 1 : 0 }}
-          >
-            <CrimeCategoryChart />
-          </div>
+      <div className="hidden xl:flex absolute bottom-0 left-0 right-0 justify-between space-x-6">
+        <div
+          className="h-48 aspect-square bg-background/80 backdrop-blur rounded-lg border transition-opacity duration-300"
+          style={{ opacity: crimes?.length ? 1 : 0 }}
+        >
+          <CrimePieChart />
         </div>
-      )}
+
+        <div
+          className="flex-1 bg-background/80 backdrop-blur rounded-lg border transition-opacity duration-300 pointer-events-auto"
+          style={{ opacity: crimes?.length ? 1 : 0 }}
+        >
+          <CrimeCategoryChart />
+        </div>
+      </div>
     </div>
   );
 };
