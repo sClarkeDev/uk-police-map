@@ -5,7 +5,6 @@ import { Chart } from '@/components/Sidebar/Chart';
 import { useCrimeStore } from '@/stores/crimes';
 import { useMapStore } from '@/stores/map';
 import { DateSelect } from './DateSelect';
-import { Key } from './Key';
 import { LocateControl } from './LocateControl';
 import { ThemeToggle } from './ThemeToggle';
 import { ZoomControl } from './ZoomControl';
@@ -35,8 +34,6 @@ export const Controls = () => {
 
       {sidebarVisible && (
         <div className="hidden xl:flex absolute bottom-0 left-0 right-0 justify-between space-x-6">
-          <Key />
-
           <div
             className="h-48 aspect-square bg-background/80 backdrop-blur rounded-lg border transition-opacity duration-300"
             style={{ opacity: crimes?.length ? 1 : 0 }}
