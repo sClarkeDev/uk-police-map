@@ -1,6 +1,7 @@
 'use client';
 
 import { useMobile } from '@/hooks/useMobile';
+import { useCrimeStore } from '@/stores/crimes';
 import { DrawerSnapPoint, useMapStore } from '@/stores/map';
 import { useShallow } from 'zustand/react/shallow';
 import { CrimeBarChart } from '../CrimeBarChart';
@@ -11,6 +12,9 @@ import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle } f
 import { Separator } from '../ui/separator';
 
 export const MobileDrawer = () => {
+  const crimes = useCrimeStore((state) => state.crimes);
+  const force = useCrimeStore((state) => state.force);
+
   const { drawerSnapPoint, setDrawerSnapPoint } = useMapStore(
     useShallow((state) => ({ drawerSnapPoint: state.drawerSnapPoint, setDrawerSnapPoint: state.setDrawerSnapPoint }))
   );
@@ -19,8 +23,8 @@ export const MobileDrawer = () => {
   return (
     <Drawer
       open={isMobile}
-      snapPoints={['40px', '105px', 0.8]}
-      activeSnapPoint={drawerSnapPoint}
+      snapPoints={crimes.length && force ? ['40px', '105px', 0.8] : ['40px']}
+      activeSnapPoint={crimes.length && force ? drawerSnapPoint : '40px'}
       setActiveSnapPoint={(point) => setDrawerSnapPoint(point as DrawerSnapPoint)}
       dismissible={false}
       modal={false}
