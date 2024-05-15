@@ -2,6 +2,7 @@ import { Crime } from '@/api/data-police-uk';
 import { useCrimeStore } from '@/stores/crimes';
 import { useMapStore } from '@/stores/map';
 import { useShallow } from 'zustand/react/shallow';
+import { MAX_ZOOM } from '../Map/constants';
 import { CrimeListItem } from './CrimeListItem';
 
 export const CrimeList = () => {
@@ -11,7 +12,7 @@ export const CrimeList = () => {
   const crimes = useCrimeStore((state) => state.crimes);
 
   const onClickCrime = (crime: Crime) => {
-    map?.flyTo([Number(crime.location.latitude), Number(crime.location.longitude)], 18, {
+    map?.flyTo([Number(crime.location.latitude), Number(crime.location.longitude)], MAX_ZOOM, {
       animate: true
     });
 

@@ -4,36 +4,46 @@ import { Map as LMap, LatLng } from 'leaflet';
 import { useTheme } from 'next-themes';
 import { MapContainer, Marker, TileLayer, useMapEvents } from 'react-leaflet';
 
-import { useMobile } from '@/hooks/useMobile';
 import { useCrimeStore } from '@/stores/crimes';
 import { useMapStore } from '@/stores/map';
 import { parseSameLocationCrimes } from '@/utils/crime';
 import 'leaflet-defaulticon-compatibility';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
 import 'leaflet/dist/leaflet.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CrimeMarker } from '../CrimeMarker';
 import { Controls } from './Controls';
-import { DEFAULT_ZOOM, MIN_CRIME_ZOOM } from './constants';
+import { DEFAULT_ZOOM, MAX_ZOOM, MIN_CRIME_ZOOM } from './constants';
 
 const Map = () => {
   const { theme } = useTheme();
+  const map = useMapStore((state) => state.map);
   const setMap = useMapStore((state) => state.setMap);
   const crimes = useCrimeStore((state) => state.crimes);
+  const forces = useCrimeStore((state) => state.forces);
   const updateCrimes = useCrimeStore((state) => state.updateCrimes);
-  const isMobile = useMobile();
 
   const [userLocation, setUserLocation] = useState<{ latlng: LatLng; accuracy: number } | null>();
+
+  // Fetch inital crimes
+  useEffect(() => {
+    if (!map || !forces?.length) return;
+
+    updateCrimes(map.getBounds());
+  }, [forces?.length, map, updateCrimes]);
 
   const Events = () => {
     const map = useMapEvents({
       dragend() {
         updateCrimes(map.getBounds());
       },
+      load() {
+        updateCrimes(map.getBounds());
+      },
       zoomend() {},
       locationfound(e) {
         setUserLocation({ latlng: e.latlng, accuracy: e.accuracy });
-        map?.flyTo(e.latlng, 18, {
+        map?.flyTo(e.latlng, MAX_ZOOM, {
           animate: true
         });
       },
@@ -49,8 +59,8 @@ const Map = () => {
     <div className="h-full w-full relative">
       <MapContainer
         ref={(m) => setMap(m as LMap)}
-        center={[51.505, -0.09]}
-        minZoom={isMobile ? MIN_CRIME_ZOOM - 3 : MIN_CRIME_ZOOM}
+        center={[51.508468, -0.597097]}
+        minZoom={MIN_CRIME_ZOOM}
         zoom={DEFAULT_ZOOM}
         className="h-full w-full !bg-background"
         zoomControl={false}
