@@ -29,7 +29,7 @@ export const MobileDrawer = () => {
       dismissible={false}
       modal={false}
     >
-      <DrawerContent>
+      <DrawerContent className="bg-background/80 backdrop-blur">
         <DrawerHeader className="flex items-center justify-between mb-1.5">
           <div className="flex flex-col space-y-2">
             <DrawerTitle asChild>

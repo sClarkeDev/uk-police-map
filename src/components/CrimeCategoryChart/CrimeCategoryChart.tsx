@@ -36,25 +36,22 @@ export const CrimeCategoryChart = () => {
   }, [crimes]);
 
   return (
-    <div className="w-full h-full flex flex-col py-4 px-5 bg-background/80 backdrop-blur rounded-lg border pointer-events-auto space-y-4">
-      <p className="text-base font-light">Crime Category Ratio</p>
-      <div className="flex-1">
-        <ResponsiveContainer height="100%" width="100%">
-          <BarChart width={60} height={40} data={data}>
-            <Tooltip
-              content={CustomTooltip}
-              cursor={{ fill: theme === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,.1)' }}
-            />
+    <div className="h-full w-full p-4 pl-0">
+      <ResponsiveContainer height="100%" width="100%">
+        <BarChart width={60} height={40} data={data}>
+          <Tooltip
+            content={CustomTooltip}
+            cursor={{ fill: theme === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,.1)' }}
+          />
 
-            <YAxis />
-            <Bar dataKey="count" radius={[4, 4, 0, 0]}>
-              {data.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={entry.color} />
-              ))}
-            </Bar>
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+          <YAxis />
+          <Bar dataKey="count" radius={[4, 4, 0, 0]}>
+            {data.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={entry.color} />
+            ))}
+          </Bar>
+        </BarChart>
+      </ResponsiveContainer>
     </div>
   );
 };

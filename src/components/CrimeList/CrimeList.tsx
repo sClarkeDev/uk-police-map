@@ -15,7 +15,7 @@ export const CrimeList = () => {
       animate: true
     });
 
-    setDrawerSnapPoint('100px');
+    setDrawerSnapPoint('105px');
   };
 
   return (

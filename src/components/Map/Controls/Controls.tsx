@@ -38,13 +38,16 @@ export const Controls = () => {
           <Key />
 
           <div
-            className="h-60 aspect-square bg-background/80 backdrop-blur rounded-lg border transition-opacity duration-300"
+            className="h-48 aspect-square bg-background/80 backdrop-blur rounded-lg border transition-opacity duration-300"
             style={{ opacity: crimes?.length ? 1 : 0 }}
           >
             <Chart />
           </div>
 
-          <div className="flex-1 transition-opacity duration-300" style={{ opacity: crimes?.length ? 1 : 0 }}>
+          <div
+            className="flex-1 bg-background/80 backdrop-blur rounded-lg border transition-opacity duration-300 pointer-events-auto"
+            style={{ opacity: crimes?.length ? 1 : 0 }}
+          >
             <CrimeCategoryChart />
           </div>
         </div>

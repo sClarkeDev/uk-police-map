@@ -29,32 +29,27 @@ export const Chart = () => {
   }, [crimes]);
 
   return (
-    <div className="h-full w-full flex flex-col py-4 px-5 space-y-2">
-      <p className="text-base font-light">Crime Ratio</p>
-      <div className="flex-1">
-        <ResponsiveContainer width="100%" height="100%">
-          <PieChart width={200} height={200}>
-            <Pie
-              animationDuration={500}
-              data={chartItems}
-              cx="50%"
-              cy="50%"
-              innerRadius={60}
-              outerRadius={75}
-              fill="#8884d8"
-              paddingAngle={5}
-              dataKey="value"
-              stroke="none"
-              cornerRadius={8}
-            >
-              <Label value={`${crimes.length} Crimes`} position="center" className="text-lg" />
-              {chartItems.map((entry, index) => (
-                <Cell key={`cell-${index}`} radius={20} className="border-0 !border-transparent" fill={entry.fill} />
-              ))}
-            </Pie>
-          </PieChart>
-        </ResponsiveContainer>
-      </div>
-    </div>
+    <ResponsiveContainer width="100%" height="100%">
+      <PieChart width={200} height={200}>
+        <Pie
+          animationDuration={500}
+          data={chartItems}
+          cx="50%"
+          cy="50%"
+          innerRadius={60}
+          outerRadius={75}
+          fill="#8884d8"
+          paddingAngle={5}
+          dataKey="value"
+          stroke="none"
+          cornerRadius={8}
+        >
+          <Label value={`Crime Ratio`} position="center" className="text-base" />
+          {chartItems.map((entry, index) => (
+            <Cell key={`cell-${index}`} radius={20} className="border-0 !border-transparent" fill={entry.fill} />
+          ))}
+        </Pie>
+      </PieChart>
+    </ResponsiveContainer>
   );
 };
