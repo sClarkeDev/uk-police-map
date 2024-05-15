@@ -18,9 +18,9 @@ export const ForceDialog = () => {
         </DialogHeader>
 
         <div className="flex space-x-4">
-          {force.engagement_methods?.map((social) => (
-            <SocialButton key={social.title} id={social.type} url={social.url} />
-          ))}
+          {force.engagement_methods
+            ?.filter((f) => f.type)
+            .map((social) => <SocialButton key={social.title} id={social.type} url={social.url} />)}
         </div>
       </DialogContent>
     </Dialog>

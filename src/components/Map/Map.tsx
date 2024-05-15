@@ -1,19 +1,16 @@
 'use client';
 
-import { Map as LMap, LatLng } from 'leaflet';
-import { useTheme } from 'next-themes';
-import { MapContainer, Marker, TileLayer, useMapEvents } from 'react-leaflet';
-
 import { useCrimeStore } from '@/stores/crimes';
 import { useMapStore } from '@/stores/map';
 import { parseSameLocationCrimes } from '@/utils/crime';
-import 'leaflet-defaulticon-compatibility';
-import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
+import { Map as LMap, LatLng } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
+import { CircleMarker, MapContainer, TileLayer, useMapEvents } from 'react-leaflet';
 import { CrimeMarker } from '../CrimeMarker';
 import { Controls } from './Controls';
-import { DEFAULT_ZOOM, MAX_ZOOM, MIN_CRIME_ZOOM } from './constants';
+import { DEFAULT_ZOOM, MIN_CRIME_ZOOM } from './constants';
 
 const Map = () => {
   const { theme } = useTheme();
@@ -34,16 +31,13 @@ const Map = () => {
 
   const Events = () => {
     const map = useMapEvents({
-      dragend() {
-        updateCrimes(map.getBounds());
-      },
-      load() {
+      moveend() {
         updateCrimes(map.getBounds());
       },
       zoomend() {},
       locationfound(e) {
         setUserLocation({ latlng: e.latlng, accuracy: e.accuracy });
-        map?.flyTo(e.latlng, MAX_ZOOM, {
+        map?.flyTo(e.latlng, DEFAULT_ZOOM, {
           animate: true
         });
       },
@@ -75,7 +69,7 @@ const Map = () => {
           <CrimeMarker key={crime.id} crime={crime} />
         ))}
 
-        {userLocation && <Marker position={userLocation.latlng} />}
+        {userLocation && <CircleMarker center={userLocation.latlng} radius={20} fillOpacity={0.6} />}
 
         <Events />
         <Controls />
