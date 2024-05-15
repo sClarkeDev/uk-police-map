@@ -10,7 +10,7 @@ export const ForceDialog = () => {
   return (
     <Dialog>
       <DialogTrigger className="mr-auto !py-0 hover:underline pointer-events-auto">
-        <p className="text-base font-semibold leading-none tracking-tight xl:text-3xl">{force.name}</p>
+        <p className="text-base font-semibold leading-none xl:text-3xl">{force.name}</p>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>

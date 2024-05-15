@@ -10,7 +10,7 @@ export const NeighbourhoodDialog = () => {
   return (
     <Dialog>
       <DialogTrigger className="mr-auto !py-0 hover:underline pointer-events-auto">
-        <p className="text-sm text-muted-foreground xl:text-lg">{neighbourhood.name}</p>
+        <p className="text-sm text-muted-foreground xl:text-xl">{neighbourhood.name}</p>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
