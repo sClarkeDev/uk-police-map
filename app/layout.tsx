@@ -12,7 +12,10 @@ const montserrat = Poppins({
 
 export const metadata: Metadata = {
   title: 'UK Police Map',
-  description: 'View crime information within the UK area'
+  description: 'View crime information within the UK area',
+  icons: {
+    icon: '/icon.png'
+  }
 };
 
 export default function RootLayout({
