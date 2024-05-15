@@ -12,3 +12,5 @@ export const GET = async (request: Request, { params }: { params: { z: string; x
   response.headers.set('content-type', 'image/png');
   return response;
 };
+
+export const runtime = 'edge';
