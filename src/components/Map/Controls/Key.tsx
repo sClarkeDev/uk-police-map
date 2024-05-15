@@ -14,7 +14,7 @@ const KeyItem = ({ text, color }: { text: string; color: string }) => {
 
 export const Key = () => {
   return (
-    <div className="flex flex-col justify-around px-5 py-4 bg-background/80 backdrop-blur-md rounded-lg">
+    <div className="flex flex-col justify-around px-5 py-4 bg-background/80 backdrop-blur rounded-lg">
       <KeyItem text="Low Severity" color={BLUE} />
       <KeyItem text="Medium Severity" color={YELLOW} />
       <KeyItem text="High Severity" color={RED} />

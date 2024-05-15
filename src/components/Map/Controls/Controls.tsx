@@ -1,5 +1,6 @@
 import { CrimeCategoryChart } from '@/components/CrimeCategoryChart';
 import { ForceDialog } from '@/components/ForceDialog';
+import { Chart } from '@/components/Sidebar/Chart';
 import { useMapStore } from '@/stores/map';
 import { DateSelect } from './DateSelect';
 import { Key } from './Key';
@@ -31,6 +32,10 @@ export const Controls = () => {
       {sidebarVisible && (
         <div className="hidden xl:flex absolute bottom-0 left-0 right-0 justify-between space-x-6">
           <Key />
+
+          <div className="h-60 aspect-square bg-background/80 backdrop-blur rounded-lg border">
+            <Chart />
+          </div>
 
           <div className="flex-1">
             <CrimeCategoryChart />
