@@ -30,7 +30,7 @@ export const Chart = () => {
 
   return (
     <div className="h-full w-full flex flex-col py-4 px-5 space-y-2">
-      <p className="text-base text-muted-foreground">Crime Ratio</p>
+      <p className="text-base font-light">Crime Ratio</p>
       <div className="flex-1">
         <ResponsiveContainer width="100%" height="100%">
           <PieChart width={200} height={200}>
