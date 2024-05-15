@@ -3,7 +3,7 @@ import { memo } from 'react';
 import { Marker, Popup } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-cluster';
 
-import { NestedCrime } from '@/api/data-police-uk';
+import { Crime, NestedCrime } from '@/api/data-police-uk';
 import { getCrimeCategoryName, getCrimeColor, getCrimeSeverity } from '@/utils/crime';
 import './styles.css';
 
@@ -26,21 +26,24 @@ export const CrimeMarker = memo(({ crime }: CrimeMarkerProps) => {
       spiderLegPolylineOptions={{ opacity: 0 }}
       iconCreateFunction={() => markerDivIcon(getCrimeColor(getCrimeSeverity(crime)))}
     >
-      <Marker
-        position={[Number(crime.location.latitude), Number(crime.location.longitude)]}
-        icon={markerDivIcon(getCrimeColor(getCrimeSeverity(crime)))}
-      >
-        <Popup>{getCrimeCategoryName(crime.category)}</Popup>
-      </Marker>
+      <MarkerIcon crime={crime} />
+
       {crime.sameLocation.map((c) => (
-        <Marker
-          key={c.id}
-          position={[Number(crime.location.latitude), Number(crime.location.longitude)]}
-          icon={markerDivIcon(getCrimeColor(getCrimeSeverity(c)))}
-        >
-          <Popup>{getCrimeCategoryName(c.category)}</Popup>
-        </Marker>
+        <MarkerIcon key={c.id} crime={c} />
       ))}
     </MarkerClusterGroup>
   );
 });
+
+const MarkerIcon = ({ crime }: { crime: Crime }) => (
+  <Marker
+    position={[Number(crime.location.latitude), Number(crime.location.longitude)]}
+    icon={markerDivIcon(getCrimeColor(getCrimeSeverity(crime)))}
+  >
+    <Popup className="flex text-center">
+      <p className="text-base">{getCrimeCategoryName(crime.category)}</p>
+      <p className="text-muted-foreground">{crime.outcome_status && crime.outcome_status?.category}</p>
+      <p className="text-muted-foreground">{crime.location?.street && crime.location.street.name}</p>
+    </Popup>
+  </Marker>
+);
