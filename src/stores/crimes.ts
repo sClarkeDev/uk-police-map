@@ -22,7 +22,7 @@ interface CrimeState {
   selectedDate: string;
   setSelectedDate: (date: string) => void;
   crimes: Crime[];
-  updateCrimes: (bounds: LatLngBounds) => void;
+  updateCrimes: (bounds: LatLngBounds, date?: string) => void;
   neighbourhood: Neighborhood | null;
 }
 
@@ -32,12 +32,12 @@ export const useCrimeStore = create<CrimeState>((set, get) => ({
   dates: [],
   selectedDate: '',
   setSelectedDate: (date) => {
-    get().updateCrimes(useMapStore.getState().map?.getBounds() as LatLngBounds);
+    get().updateCrimes(useMapStore.getState().map?.getBounds() as LatLngBounds, date);
     set({ selectedDate: date });
   },
   crimes: [],
-  updateCrimes: async (bounds) => {
-    const crimes = await getCrimesInBounds(bounds, get().selectedDate);
+  updateCrimes: async (bounds: LatLngBounds, date?: string) => {
+    const crimes = await getCrimesInBounds(bounds, date || get().selectedDate);
     set({ crimes });
 
     const locatedNeighbourhood = await locateNeighbourhood(bounds.getCenter());
