@@ -45,10 +45,11 @@ export const Chart = () => {
               paddingAngle={5}
               dataKey="value"
               stroke="none"
+              cornerRadius={8}
             >
               <Label value={`${crimes.length} Crimes`} position="center" className="text-lg" />
               {chartItems.map((entry, index) => (
-                <Cell key={`cell-${index}`} className="border-0 !border-transparent" fill={entry.fill} />
+                <Cell key={`cell-${index}`} radius={20} className="border-0 !border-transparent" fill={entry.fill} />
               ))}
             </Pie>
           </PieChart>

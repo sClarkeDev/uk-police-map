@@ -4,6 +4,7 @@ import { Bar, BarChart, Cell, ResponsiveContainer, Tooltip, YAxis } from 'rechar
 
 import { CrimeSeverity } from '@/api/data-police-uk';
 import { getCrimeColor } from '@/utils/crime';
+import { useTheme } from 'next-themes';
 import categories from '../../assets/categories.json';
 
 const CustomTooltip = ({ active, payload }: any) => {
@@ -19,6 +20,7 @@ const CustomTooltip = ({ active, payload }: any) => {
 };
 
 export const CrimeCategoryChart = () => {
+  const { theme } = useTheme();
   const crimes = useCrimeStore((state) => state.crimes);
 
   const data = useMemo(() => {
@@ -39,10 +41,13 @@ export const CrimeCategoryChart = () => {
       <div className="flex-1">
         <ResponsiveContainer height="100%" width="100%">
           <BarChart width={60} height={40} data={data}>
-            <Tooltip content={CustomTooltip} />
+            <Tooltip
+              content={CustomTooltip}
+              cursor={{ fill: theme === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,.1)' }}
+            />
 
             <YAxis />
-            <Bar dataKey="count">
+            <Bar dataKey="count" radius={[4, 4, 0, 0]}>
               {data.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={entry.color} />
               ))}
