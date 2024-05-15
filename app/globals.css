@@ -66,10 +66,14 @@ body {
 
 mapbox-geocoder > div {
   height: 2.5rem;
+  display: flex !important;
+  align-items: center !important;
 }
 
 mapbox-geocoder > div > input {
   color: hls(var(--foreground)) !important;
+  font-weight: 400 !important;
+  font-size: 0.875rem !important;
 }
 
 mapbox-geocoder > div > input:focus {

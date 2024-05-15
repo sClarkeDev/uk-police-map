@@ -4,6 +4,7 @@ import { Map as LMap, LatLng } from 'leaflet';
 import { useTheme } from 'next-themes';
 import { MapContainer, Marker, TileLayer, useMapEvents } from 'react-leaflet';
 
+import { useMobile } from '@/hooks/useMobile';
 import { useCrimeStore } from '@/stores/crimes';
 import { useMapStore } from '@/stores/map';
 import { parseSameLocationCrimes } from '@/utils/crime';
@@ -20,6 +21,7 @@ const Map = () => {
   const setMap = useMapStore((state) => state.setMap);
   const crimes = useCrimeStore((state) => state.crimes);
   const updateCrimes = useCrimeStore((state) => state.updateCrimes);
+  const isMobile = useMobile();
 
   const [userLocation, setUserLocation] = useState<{ latlng: LatLng; accuracy: number } | null>();
 
@@ -48,7 +50,7 @@ const Map = () => {
       <MapContainer
         ref={(m) => setMap(m as LMap)}
         center={[51.505, -0.09]}
-        minZoom={MIN_CRIME_ZOOM}
+        minZoom={isMobile ? MIN_CRIME_ZOOM - 3 : MIN_CRIME_ZOOM}
         zoom={DEFAULT_ZOOM}
         className="h-full w-full !bg-background"
         zoomControl={false}
