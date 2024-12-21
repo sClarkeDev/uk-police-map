@@ -1,7 +1,5 @@
 # UK Police Map
 
-MAPBOX TOKEN WILL BE CHANGED SOON. WE HAVE HAD A SURGE TRAFFIC AND THE FREE PACKAGE IS NOT COVERING IT. WILL BE SWAPPED OVER TO GOOGLE MAPS THIS WEEKEND
-
 An interactive map that shows crime information and statistics in the UK
 
 https://uk-police-map.pages.dev
