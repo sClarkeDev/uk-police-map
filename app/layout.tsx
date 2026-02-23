@@ -1,24 +1,17 @@
-import { Poppins } from "next/font/google"
-
-import { cn } from "@/utils/cn"
-
-import type { Metadata } from "next"
-import "./globals.css"
+import { Geist, Geist_Mono } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
 
-const montserrat = Poppins({
-  weight: ["300", "400", "500", "700", "800"],
+import "./globals.css"
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
   subsets: ["latin"],
-  variable: "--font-sans",
 })
 
-export const metadata: Metadata = {
-  title: "UK Police Map",
-  description: "View crime information within the UK area",
-  icons: {
-    icon: "/icon.png",
-  },
-}
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+})
 
 export default function RootLayout({
   children,
@@ -26,8 +19,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className={cn("min-h-screen bg-background font-sans antialiased", montserrat.variable)}>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ThemeProvider
           defaultTheme="system"
           attribute="class"
@@ -40,5 +33,3 @@ export default function RootLayout({
     </html>
   )
 }
-
-export const runtime = "edge"

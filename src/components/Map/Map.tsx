@@ -16,7 +16,6 @@ import { DEFAULT_ZOOM, MIN_CRIME_ZOOM } from "./constants"
 import { Controls } from "./Controls"
 
 const Map = () => {
-  const { theme } = useTheme()
   const map = useMapStore((state) => state.map)
   const setMap = useMapStore((state) => state.setMap)
   const crimes = useCrimeStore((state) => state.crimes)
@@ -65,7 +64,7 @@ const Map = () => {
       >
         <TileLayer
           attribution='© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a></strong>'
-          url={`https://api.mapbox.com/styles/v1/mapbox/streets-v12/static/{z}/{x}/{y}{r}?access_token=${process.env.NEXT_PUBLIC_MAPBOX_TOKEN}`}
+          url={`https://api.mapbox.com/styles/v1/mapbox/dark-v11/tiles/{z}/{x}/{y}{r}?access_token=${process.env.NEXT_PUBLIC_MAPBOX_TOKEN}`}
         />
 
         {parseSameLocationCrimes(crimes).map((crime) => (
