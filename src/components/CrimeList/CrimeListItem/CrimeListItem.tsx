@@ -1,12 +1,12 @@
-import { Locate } from 'lucide-react';
+import { Locate } from "lucide-react"
 
-import { Crime } from '@/api/data-police-uk';
-import { Button } from '@/components/ui/button';
-import { getCrimeCategoryName, getCrimeColor, getCrimeSeverity } from '@/utils/crime';
+import { Crime } from "@/api/data-police-uk"
+import { Button } from "@/components/ui/button"
+import { getCrimeCategoryName, getCrimeColor, getCrimeSeverity } from "@/utils/crime"
 
 interface CrimeListItemProps {
-  crime: Crime;
-  onClick: (crime: Crime) => void;
+  crime: Crime
+  onClick: (crime: Crime) => void
 }
 
 export const CrimeListItem = ({ crime, onClick }: CrimeListItemProps) => {
@@ -25,5 +25,5 @@ export const CrimeListItem = ({ crime, onClick }: CrimeListItemProps) => {
         </Button>
       </div>
     </div>
-  );
-};
+  )
+}

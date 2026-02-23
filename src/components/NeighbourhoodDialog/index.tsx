@@ -1,1 +1,1 @@
-export * from './NeighbourhoodDialog';
+export * from "./NeighbourhoodDialog"

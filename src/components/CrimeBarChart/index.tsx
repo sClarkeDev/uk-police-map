@@ -1,1 +1,1 @@
-export * from './CrimeBarChart';
+export * from "./CrimeBarChart"

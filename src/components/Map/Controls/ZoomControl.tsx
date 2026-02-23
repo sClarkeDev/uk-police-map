@@ -1,14 +1,14 @@
-import { Minus, Plus } from 'lucide-react';
+import { Minus, Plus } from "lucide-react"
 
-import { Button } from '@/components/ui/button';
-import { useMapStore } from '@/stores/map';
+import { Button } from "@/components/ui/button"
+import { useMapStore } from "@/stores/map"
 
 export const ZoomControl = () => {
-  const map = useMapStore((state) => state.map);
+  const map = useMapStore((state) => state.map)
 
-  const onClickZoomIn = () => map?.zoomIn();
+  const onClickZoomIn = () => map?.zoomIn()
 
-  const onClickZoomOut = () => map?.zoomOut();
+  const onClickZoomOut = () => map?.zoomOut()
 
   return (
     <div className="flex flex-col space-y-3">
@@ -20,5 +20,5 @@ export const ZoomControl = () => {
         <Minus className="h-4 w-4" />
       </Button>
     </div>
-  );
-};
+  )
+}

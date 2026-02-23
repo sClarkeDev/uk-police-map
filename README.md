@@ -10,7 +10,6 @@ https://uk-police-map.pages.dev
 - [Features](#features)
 - [Local Development](#local-development)
 
-
 ## Technologies Used
 
 - React
@@ -28,14 +27,17 @@ https://uk-police-map.pages.dev
 ## Local Development
 
 1. Step 1 - Install dependencies
+
 ```bash
 $ yarn install
 ```
+
 2. Step 2 - Add env variables
    - Create a .env.local file in the root directory
-   - Add both ```MAPBOX_ACCESS_TOKEN``` and  ```NEXT_PUBLIC_MAPBOX_GEOCODING_ACCESS_TOKEN``` variables
+   - Add both `MAPBOX_ACCESS_TOKEN` and `NEXT_PUBLIC_MAPBOX_GEOCODING_ACCESS_TOKEN` variables
 
 1. Step 3 - Run development server
+
 ```bash
 $ yarn dev
 ```

@@ -1,53 +1,56 @@
-'use client';
+"use client"
 
-import { useCrimeStore } from '@/stores/crimes';
-import { useMapStore } from '@/stores/map';
-import { parseSameLocationCrimes } from '@/utils/crime';
-import { Map as LMap, LatLng } from 'leaflet';
-import 'leaflet/dist/leaflet.css';
-import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
-import { CircleMarker, MapContainer, TileLayer, useMapEvents } from 'react-leaflet';
-import { CrimeMarker } from '../CrimeMarker';
-import { Controls } from './Controls';
-import { DEFAULT_ZOOM, MIN_CRIME_ZOOM } from './constants';
+import { useCrimeStore } from "@/stores/crimes"
+import { useMapStore } from "@/stores/map"
+import { parseSameLocationCrimes } from "@/utils/crime"
+
+import { Map as LMap, LatLng } from "leaflet"
+import "leaflet/dist/leaflet.css"
+import { useTheme } from "next-themes"
+import { useEffect, useState } from "react"
+import { CircleMarker, MapContainer, TileLayer, useMapEvents } from "react-leaflet"
+
+import { CrimeMarker } from "../CrimeMarker"
+
+import { DEFAULT_ZOOM, MIN_CRIME_ZOOM } from "./constants"
+import { Controls } from "./Controls"
 
 const Map = () => {
-  const { theme } = useTheme();
-  const map = useMapStore((state) => state.map);
-  const setMap = useMapStore((state) => state.setMap);
-  const crimes = useCrimeStore((state) => state.crimes);
-  const forces = useCrimeStore((state) => state.forces);
-  const updateCrimes = useCrimeStore((state) => state.updateCrimes);
+  const { theme } = useTheme()
+  const map = useMapStore((state) => state.map)
+  const setMap = useMapStore((state) => state.setMap)
+  const crimes = useCrimeStore((state) => state.crimes)
+  const forces = useCrimeStore((state) => state.forces)
+  const updateCrimes = useCrimeStore((state) => state.updateCrimes)
 
-  const [userLocation, setUserLocation] = useState<{ latlng: LatLng; accuracy: number } | null>();
+  const [userLocation, setUserLocation] = useState<{ latlng: LatLng; accuracy: number } | null>()
 
   // Fetch inital crimes
   useEffect(() => {
-    if (!map || !forces?.length) return;
+    if (!map || !forces?.length) return
 
-    updateCrimes(map.getBounds());
-  }, [forces?.length, map, updateCrimes]);
+    updateCrimes(map.getBounds())
+  }, [forces?.length, map, updateCrimes])
 
   const Events = () => {
     const map = useMapEvents({
       moveend() {
-        updateCrimes(map.getBounds());
+        updateCrimes(map.getBounds())
       },
       zoomend() {},
       locationfound(e) {
-        setUserLocation({ latlng: e.latlng, accuracy: e.accuracy });
+        setUserLocation({ latlng: e.latlng, accuracy: e.accuracy })
         map?.flyTo(e.latlng, DEFAULT_ZOOM, {
-          animate: true
-        });
+          animate: true,
+        })
       },
       locationerror(e) {
-        alert(e.message);
-      }
-    });
+        alert(e.message)
+      },
+    })
 
-    return null;
-  };
+    return null
+  }
 
   return (
     <div className="h-full w-full relative">
@@ -62,20 +65,22 @@ const Map = () => {
       >
         <TileLayer
           attribution='© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a></strong>'
-          url={`/api/map/{z}/{x}/{y}?theme=${theme}`}
+          url={`https://api.mapbox.com/styles/v1/mapbox/streets-v12/static/{z}/{x}/{y}{r}?access_token=${process.env.NEXT_PUBLIC_MAPBOX_TOKEN}`}
         />
 
         {parseSameLocationCrimes(crimes).map((crime) => (
           <CrimeMarker key={crime.id} crime={crime} />
         ))}
 
-        {userLocation && <CircleMarker center={userLocation.latlng} radius={20} fillOpacity={0.6} />}
+        {userLocation && (
+          <CircleMarker center={userLocation.latlng} radius={20} fillOpacity={0.6} />
+        )}
 
         <Events />
         <Controls />
       </MapContainer>
     </div>
-  );
-};
+  )
+}
 
-export default Map;
+export default Map

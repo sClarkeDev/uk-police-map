@@ -1,32 +1,32 @@
-import { Cell, Label, Pie, PieChart, ResponsiveContainer } from 'recharts';
+import { useEffect, useState } from "react"
+import { Cell, Label, Pie, PieChart, ResponsiveContainer } from "recharts"
 
-import { BLUE, RED, YELLOW } from '@/constants/colors';
-import { useCrimeStore } from '@/stores/crimes';
-import { getCrimeSeverity } from '@/utils/crime';
-import { useEffect, useState } from 'react';
+import { BLUE, RED, YELLOW } from "@/constants/colors"
+import { useCrimeStore } from "@/stores/crimes"
+import { getCrimeSeverity } from "@/utils/crime"
 
 export type ChartItem = {
-  name: string;
-  value: number;
-  fill: string;
-};
+  name: string
+  value: number
+  fill: string
+}
 
 export const CrimePieChart = () => {
-  const crimes = useCrimeStore((state) => state.crimes);
+  const crimes = useCrimeStore((state) => state.crimes)
 
-  const [chartItems, setChartItems] = useState<ChartItem[]>([]);
+  const [chartItems, setChartItems] = useState<ChartItem[]>([])
 
   useEffect(() => {
-    const lowCount = crimes.filter((c) => getCrimeSeverity(c) === 'low').length;
-    const mediumCount = crimes.filter((c) => getCrimeSeverity(c) === 'medium').length;
-    const highCount = crimes.filter((c) => getCrimeSeverity(c) === 'high').length;
+    const lowCount = crimes.filter((c) => getCrimeSeverity(c) === "low").length
+    const mediumCount = crimes.filter((c) => getCrimeSeverity(c) === "medium").length
+    const highCount = crimes.filter((c) => getCrimeSeverity(c) === "high").length
 
     setChartItems([
-      { name: 'Low', value: lowCount, fill: BLUE },
-      { name: 'Medium', value: mediumCount, fill: YELLOW },
-      { name: 'High', value: highCount, fill: RED }
-    ]);
-  }, [crimes]);
+      { name: "Low", value: lowCount, fill: BLUE },
+      { name: "Medium", value: mediumCount, fill: YELLOW },
+      { name: "High", value: highCount, fill: RED },
+    ])
+  }, [crimes])
 
   return (
     <ResponsiveContainer width="100%" height="100%">
@@ -46,10 +46,15 @@ export const CrimePieChart = () => {
         >
           <Label value={`Crime Ratio`} position="center" className="text-base" />
           {chartItems.map((entry, index) => (
-            <Cell key={`cell-${index}`} radius={20} className="border-0 !border-transparent" fill={entry.fill} />
+            <Cell
+              key={`cell-${index}`}
+              radius={20}
+              className="border-0 !border-transparent"
+              fill={entry.fill}
+            />
           ))}
         </Pie>
       </PieChart>
     </ResponsiveContainer>
-  );
-};
+  )
+}

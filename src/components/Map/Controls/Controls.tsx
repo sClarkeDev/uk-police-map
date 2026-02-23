@@ -1,20 +1,23 @@
-import { CrimeCategoryChart } from '@/components/CrimeCategoryChart';
-import { CrimePieChart } from '@/components/CrimePieChart';
-import { ForceDialog } from '@/components/ForceDialog';
-import { NeighbourhoodDialog } from '@/components/NeighbourhoodDialog';
-import { useCrimeStore } from '@/stores/crimes';
+import { CrimeCategoryChart } from "@/components/CrimeCategoryChart"
+import { CrimePieChart } from "@/components/CrimePieChart"
+import { ForceDialog } from "@/components/ForceDialog"
+import { NeighbourhoodDialog } from "@/components/NeighbourhoodDialog"
+import { useCrimeStore } from "@/stores/crimes"
 
-import { DateSelect } from './DateSelect';
-import { LocateControl } from './LocateControl';
-import { Search } from './Search';
-import { ThemeToggle } from './ThemeToggle';
-import { ZoomControl } from './ZoomControl';
+import { DateSelect } from "./DateSelect"
+import { LocateControl } from "./LocateControl"
+import { Search } from "./Search"
+import { ThemeToggle } from "./ThemeToggle"
+import { ZoomControl } from "./ZoomControl"
 
 export const Controls = () => {
-  const crimes = useCrimeStore((state) => state.crimes);
+  const crimes = useCrimeStore((state) => state.crimes)
 
   return (
-    <div className="absolute top-0 left-0 right-0 bottom-0 m-4 lg:m-6 pointer-events-none" style={{ zIndex: 9999 }}>
+    <div
+      className="absolute top-0 left-0 right-0 bottom-0 m-4 lg:m-6 pointer-events-none"
+      style={{ zIndex: 9999 }}
+    >
       <div className="flex justify-end xl:justify-between xl:space-x-4">
         <div className="hidden xl:flex flex-col space-y-2.5">
           <ForceDialog />
@@ -49,5 +52,5 @@ export const Controls = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
