@@ -7,7 +7,6 @@ import { useCrimeStore } from "@/stores/crimes"
 import { DateSelect } from "./DateSelect"
 import { LocateControl } from "./LocateControl"
 import { Search } from "./Search"
-import { ThemeToggle } from "./ThemeToggle"
 import { ZoomControl } from "./ZoomControl"
 
 export const Controls = () => {
@@ -29,7 +28,6 @@ export const Controls = () => {
           <DateSelect />
 
           <div className="flex flex-col-reverse space-y-3 space-y-reverse xl:flex-row xl:space-y-0 xl:space-x-4 [&>*]:pointer-events-auto">
-            <ThemeToggle />
             <LocateControl />
             <ZoomControl />
           </div>

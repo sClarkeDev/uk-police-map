@@ -11,7 +11,7 @@ export const Sidebar = () => {
   const crimes = useCrimeStore((state) => state.crimes)
 
   return (
-    <div className="flex-1 flex flex-col animate-in slide-in-from-right">
+    <div className="flex-1 flex flex-col animate-in slide-in-from-right bg-sidebar">
       <div>
         <div className="flex items-center justify-between py-7 px-8">
           <h1 className="text-2xl">UK Police Map</h1>
