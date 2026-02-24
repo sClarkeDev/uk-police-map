@@ -29,15 +29,15 @@ https://uk-police-map.pages.dev
 1. Step 1 - Install dependencies
 
 ```bash
-$ yarn install
+$ npm install
 ```
 
 2. Step 2 - Add env variables
-   - Create a .env.local file in the root directory
-   - Add both `MAPBOX_ACCESS_TOKEN` and `NEXT_PUBLIC_MAPBOX_GEOCODING_ACCESS_TOKEN` variables
+   - Rename .env.local.example to .env.local
+   - Fill out information
 
 1. Step 3 - Run development server
 
 ```bash
-$ yarn dev
+$ npm run dev
 ```
