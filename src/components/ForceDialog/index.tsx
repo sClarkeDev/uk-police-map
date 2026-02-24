@@ -1,1 +1,1 @@
-export * from './ForceDialog';
+export * from "./ForceDialog"

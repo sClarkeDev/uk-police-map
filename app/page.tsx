@@ -1,14 +1,15 @@
-'use client';
+"use client"
 
-import { MobileDrawer } from '@/components/MobileDrawer/MobileDrawer';
-import { Sidebar } from '@/components/Sidebar';
-import { useMapStore } from '@/stores/map';
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic"
 
-const Map = dynamic(() => import('@/components/Map/Map'), { ssr: false });
+import { MobileDrawer } from "@/components/MobileDrawer/MobileDrawer"
+import { Sidebar } from "@/components/Sidebar"
+import { useMapStore } from "@/stores/map"
+
+const Map = dynamic(() => import("@/components/Map/Map"), { ssr: false })
 
 const HomePage = () => {
-  const map = useMapStore((state) => state.map);
+  const map = useMapStore((state) => state.map)
 
   return (
     <div className="h-full w-full flex overflow-hidden">
@@ -23,7 +24,7 @@ const HomePage = () => {
       {/* Render Mobile Drawer after map is initalized to avoid tiling issues */}
       {map && <MobileDrawer />}
     </div>
-  );
-};
+  )
+}
 
-export default HomePage;
+export default HomePage

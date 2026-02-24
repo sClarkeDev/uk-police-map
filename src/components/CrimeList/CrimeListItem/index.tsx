@@ -1,1 +1,1 @@
-export * from './CrimeListItem';
+export * from "./CrimeListItem"

@@ -1,11 +1,18 @@
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { useCrimeStore } from '@/stores/crimes';
-import { SocialButton } from '../SocialButton';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { useCrimeStore } from "@/stores/crimes"
+
+import { SocialButton } from "../SocialButton"
 
 export const ForceDialog = () => {
-  const force = useCrimeStore((state) => state.force);
+  const force = useCrimeStore((state) => state.force)
 
-  if (!force) return null;
+  if (!force) return null
 
   return (
     <Dialog>
@@ -20,9 +27,11 @@ export const ForceDialog = () => {
         <div className="flex space-x-4">
           {force.engagement_methods
             ?.filter((f) => f.type)
-            .map((social) => <SocialButton key={social.title} id={social.type} url={social.url} />)}
+            .map((social) => (
+              <SocialButton key={social.title} id={social.type} url={social.url} />
+            ))}
         </div>
       </DialogContent>
     </Dialog>
-  );
-};
+  )
+}

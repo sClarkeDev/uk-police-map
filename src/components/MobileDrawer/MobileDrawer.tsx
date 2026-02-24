@@ -1,30 +1,35 @@
-'use client';
+"use client"
 
-import { useMobile } from '@/hooks/useMobile';
-import { useCrimeStore } from '@/stores/crimes';
-import { DrawerSnapPoint, useMapStore } from '@/stores/map';
-import { useShallow } from 'zustand/react/shallow';
-import { CrimeBarChart } from '../CrimeBarChart';
-import { CrimeList } from '../CrimeList';
-import { ForceDialog } from '../ForceDialog';
-import { NeighbourhoodDialog } from '../NeighbourhoodDialog';
-import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle } from '../ui/drawer';
-import { Separator } from '../ui/separator';
+import { useShallow } from "zustand/react/shallow"
+
+import { useMobile } from "@/hooks/useMobile"
+import { useCrimeStore } from "@/stores/crimes"
+import { DrawerSnapPoint, useMapStore } from "@/stores/map"
+
+import { CrimeBarChart } from "../CrimeBarChart"
+import { CrimeList } from "../CrimeList"
+import { ForceDialog } from "../ForceDialog"
+import { NeighbourhoodDialog } from "../NeighbourhoodDialog"
+import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle } from "../ui/drawer"
+import { Separator } from "../ui/separator"
 
 export const MobileDrawer = () => {
-  const crimes = useCrimeStore((state) => state.crimes);
-  const force = useCrimeStore((state) => state.force);
+  const crimes = useCrimeStore((state) => state.crimes)
+  const force = useCrimeStore((state) => state.force)
 
   const { drawerSnapPoint, setDrawerSnapPoint } = useMapStore(
-    useShallow((state) => ({ drawerSnapPoint: state.drawerSnapPoint, setDrawerSnapPoint: state.setDrawerSnapPoint }))
-  );
-  const isMobile = useMobile();
+    useShallow((state) => ({
+      drawerSnapPoint: state.drawerSnapPoint,
+      setDrawerSnapPoint: state.setDrawerSnapPoint,
+    }))
+  )
+  const isMobile = useMobile()
 
   return (
     <Drawer
       open={isMobile}
-      snapPoints={crimes.length && force ? ['40px', '105px', 1] : ['40px']}
-      activeSnapPoint={crimes.length && force ? drawerSnapPoint : '40px'}
+      snapPoints={crimes.length && force ? ["40px", "105px", 1] : ["40px"]}
+      activeSnapPoint={crimes.length && force ? drawerSnapPoint : "40px"}
       setActiveSnapPoint={(point) => setDrawerSnapPoint(point as DrawerSnapPoint)}
       dismissible={false}
       modal={false}
@@ -50,5 +55,5 @@ export const MobileDrawer = () => {
         </div>
       </DrawerContent>
     </Drawer>
-  );
-};
+  )
+}
