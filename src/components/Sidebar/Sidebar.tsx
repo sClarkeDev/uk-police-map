@@ -1,33 +1,48 @@
 "use client"
 
+import { Github, TrendingUp } from "lucide-react"
+
 import { useCrimeStore } from "@/stores/crimes"
 
 import { CrimeList } from "../CrimeList"
+import { Badge } from "../ui/badge"
 import { Button } from "../ui/button"
+import { Card, CardAction, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card"
 import { Separator } from "../ui/separator"
-import { Github } from "lucide-react"
 
 export const Sidebar = () => {
   const crimes = useCrimeStore((state) => state.crimes)
 
   return (
     <div className="flex-1 flex flex-col animate-in slide-in-from-right bg-sidebar">
-      <div>
-        <div className="flex items-center justify-between py-7 px-8">
-          <h1 className="text-2xl">UK Police Map</h1>
-
-          <Button variant="outline" size="icon" asChild>
-            <a
-              href="https://github.com/sClarkeDev/uk-police-map"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Github className="h-4 w-4" />
-            </a>
-          </Button>
-        </div>
-
-        <Separator />
+      <h2 className="text-sm uppercase font-bold opacity-60 px-8 pb-2">Statistics</h2>
+      <div className="grid grid-cols-2 gap-4 px-8">
+        <Card>
+          <CardHeader className="flex flex-col">
+            <CardDescription>Total Crimes</CardDescription>
+            <CardTitle className="font-semibold tabular-nums text-3xl">{crimes.length}</CardTitle>
+            <CardAction>
+              <Badge variant="outline">
+                <TrendingUp className="mr-2 h-4 w-4 text-green-500" />
+                +12.5%
+              </Badge>
+            </CardAction>
+          </CardHeader>
+        </Card>
+        <Card>
+          <CardHeader className="flex flex-col">
+            <CardDescription>Unsolved</CardDescription>
+            <CardTitle className="font-semibold tabular-nums text-3xl">
+              {crimes.filter((crime) => !crime.outcome_status).length}
+            </CardTitle>
+            <CardAction>
+              <Badge variant="outline">
+                <TrendingUp className="mr-2 h-4 w-4 text-red-500" />
+                -8.3%
+              </Badge>
+            </CardAction>
+          </CardHeader>
+        </Card>
       </div>
       {crimes.length ? (
         <>
