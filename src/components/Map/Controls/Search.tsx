@@ -14,14 +14,14 @@ export const Search = () => {
       <Geocoder
         theme={{
           variables: {
-            colorBackground: "hsl(var(--background))",
-            colorText: "hsl(var(--foreground))",
-            colorPrimary: "hsl(var(--foreground))",
-            colorSecondary: "hsl(var(--muted-foreground))",
-            border: "1px solid hsl(var(--input))",
-            colorBackgroundHover: "hsl(var(--accent))",
-            colorBackgroundActive: "hsl(var(--muted))",
-            colorBackdrop: "hsl(var(--background)/0.8)",
+            colorBackground: "var(--background)",
+            colorText: "var(--foreground)",
+            colorPrimary: "var(--foreground)",
+            colorSecondary: "var(--muted-foreground)",
+            border: "1px solid var(--input)",
+            colorBackgroundHover: "var(--accent)",
+            colorBackgroundActive: "var(--muted)",
+            colorBackdrop: "var(--background)/0.8",
             boxShadow: undefined,
             fontWeight: "500",
             unit: "16px",
@@ -31,7 +31,7 @@ export const Search = () => {
         placeholder="Search"
         value={searchInput}
         onChange={setSearchInput}
-        accessToken={process.env.NEXT_PUBLIC_MAPBOX_GEOCODING_ACCESS_TOKEN as string}
+        accessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN as string}
         onRetrieve={(res) =>
           map?.flyTo(
             [Number(res.geometry.coordinates[1]), Number(res.geometry.coordinates[0])],
